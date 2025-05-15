@@ -1,0 +1,26 @@
+{
+    "train": [
+        "seasonsforest",
+        "office2",
+        "abandonedfactory_night",
+        "endofworld",
+        "oldtown",
+        "soulcity",
+        "hospital",
+        "abandonedfactory",
+        "seasidetown",
+        "japanesealley"
+    ],
+    "validation": [
+        "office",
+        "ocean",
+        "amusement",
+        "seasonsforest_winter"
+    ],
+    "test": [
+        "neighborhood",
+        "westerndesert",
+        "carwelding",
+        "gascola"
+    ]
+}

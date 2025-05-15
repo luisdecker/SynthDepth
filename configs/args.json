@@ -1,0 +1,75 @@
+{
+    "pretrained_path": null,
+    "slurm": true,
+    "encoder_lr": 0.0001,
+    "lr": 0.0001,
+    "expname": "SynthDepth",
+    "normalize_sky": true,
+    "scheduler_name": "cossine",
+    "start_frozen": false,
+    "pretrained_encoder": true,
+    "crop_center": true,
+    "dataset": [
+        "midair",
+        "tartanair",
+        "hypersim",
+        "synthia",
+        "synscapes",
+        "virtualkitti"
+    ],
+    "augmentation": true,
+    "encoder_name": "base",
+    "num_workers": 80,
+    "target_size": [
+        224,
+        224
+    ],
+    "depth_clip": null,
+    "mask_sky": false,
+    "batch_size": 300,
+    "acummulate_batches": 5,
+    "epochs": 300,
+    "features": [
+        [
+            "image_l"
+        ],
+        [
+            "depth_l"
+        ]
+    ],
+    "tasks": [
+        {
+            "type": "dense_regression",
+            "name": "depth",
+            "train_on_disparity": false,
+            "loss": "midas-median",
+            "loss_params": {
+                "disparity": true,
+                "alpha": 0.5,
+                "sum_losses": false
+            },
+            "metrics": [
+                "absrel",
+                "a1",
+                "a2",
+                "a3"
+            ],
+            "channels": 1,
+            "features": [
+                "depth_l"
+            ],
+            "mask_feature": null,
+            "decoder": {
+                "type": "unetconcat",
+                "args": {
+                    "batchnorm": true,
+                    "use_relu": true,
+                    "pixel_shuffle": true,
+                    "early_aspp": true,
+                    "psupsample": true,
+                    "last_conv_kernel": 1
+                }
+            }
+        }
+    ]
+}
