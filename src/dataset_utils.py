@@ -4,7 +4,7 @@ import multiprocessing
 
 from datasets import get_dataloader
 from datasets.mixed_dataset import MixedDataset
-from default_paths import DEFAULT_SPLIT_FILES
+from default_paths import DEFAULT_SPLIT_FILES, DEFAULT_DATASET_ROOT
 
 
 def check_dataset_paths(datasets, dataset_roots, splits, root_config=None):
@@ -36,6 +36,10 @@ def prepare_dataset(datasets, target_size=None, **args):
     train_loaders = []
     val_loaders = []
     test_loaders = []
+
+    dataset_roots, splits = check_dataset_paths(
+        datasets, dataset_roots, splits, root_config=DEFAULT_DATASET_ROOT
+        )
 
     if isinstance(datasets, str):
         datasets = [datasets]

@@ -92,7 +92,7 @@ class HyperSim(Dataset):
     def _load_hdf5(self, image_path, resize_shape, feature):
         "Load an hdf5 image"
         is_depth = feature.startswith("depth")
-        with h5py.File(image_path) as f:
+        with h5py.File(image_path, locking=False) as f:
             img = f["dataset"][()].astype(np.float32)
             if self.crop_center:
                 img = self._crop_center(img)

@@ -52,7 +52,7 @@ def train(args):
 
     # Prepare dataloaders
     train_loader, val_loader, test_loader = prepare_dataset(
-        train=True, validation=True, **args
+        datasets=args["dataset"], train=True, validation=True, **args
     )
 
     # Try to train some network
@@ -142,7 +142,7 @@ def train(args):
 def test(args):
     """Test a model in KITTI and NYU datasets"""
     os.environ["CUDA_DEVICE_ORDER"] = "PCI_BUS_ID"
-    pd.options.display.float_format = '{:.3f}'.format
+    pd.options.display.float_format = "{:.3f}".format
     # Load model
     model = get_model(args)
 
